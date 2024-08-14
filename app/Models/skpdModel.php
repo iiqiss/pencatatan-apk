@@ -14,7 +14,7 @@ class skpdModel extends Model
     public function data (){
         return $this->hasMany(data::class);
     }
-    public function skpd (){
-        return $this->belongsTo(skpd::class);
+    public function pengelola (){
+        return $this->belongsTo(pengelola::class);
     }
 }
