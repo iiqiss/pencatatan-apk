@@ -11,4 +11,8 @@ class PengelolaModel extends Model
     protected $table = 'pengelola';
     protected $primaryKey = 'NIP';
     protected $fillable = ['Nama_pengelola','Kontak_pengelola','Nama_dinas'];
+    public function data (){
+        return $this->hasmany(data::class);
+    }
+    
 }
