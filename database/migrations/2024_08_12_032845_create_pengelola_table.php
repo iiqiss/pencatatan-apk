@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('pengelola', function (Blueprint $table) {
             $table->id('NIP');
             $table->string('Nama_pengelola');
-            $table->integer('Kontak_pengelola');
+            $table->bigInteger('Kontak_pengelola');
             $table->string('Nama_dinas');
         });
     }
