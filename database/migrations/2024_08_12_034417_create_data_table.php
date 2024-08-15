@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id('Id_data');
             $table->integer('Tahun_pengumpulan');
             $table->date('Tanggal_pengumpulan');
-            $table->string('Status_pengumpulan');
+            $table->enum('Status_pengumpulan',['belum','sudah','sedang dikerjakan']);
             $table->string('Keterangan_pengumpulan');
             $table->string('Judul_publikasi');
             $table->text('Link_publikasi');
