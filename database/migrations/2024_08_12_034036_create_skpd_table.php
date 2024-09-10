@@ -14,9 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('skpd', function (Blueprint $table) {
-            $table->id('Id_skpd');
-            $table->string('Nama_skpd');
-            $table->text('Alamat_skpd');
+            $table->id('id_skpd');
+            $table->string('nama_skpd');
+            $table->text('alamat_skpd');
+            $table->timestamps(); 
         });
     }
 

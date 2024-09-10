@@ -14,10 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('pengelola', function (Blueprint $table) {
-            $table->id('NIP');
-            $table->string('Nama_pengelola');
-            $table->bigInteger('Kontak_pengelola');
-            $table->string('Nama_dinas');
+            $table->id('nip');
+            $table->string('nama_pengelola');
+            $table->bigInteger('kontak_pengelola');
+            $table->string('nama_dinas');
         });
     }
 
