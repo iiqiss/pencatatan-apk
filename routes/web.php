@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\SkpdController;
+use App\Http\Controllers\PengelolaController;
 use Illuminate\Support\Facades\Route;
 
-/*
+/* 
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
@@ -16,3 +18,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route :: get ('skpd',  [ App\Http\Controllers\SkpdController::class, 'index']);
+Route::get('/login',[PengelolaController::class,'index']);
+Route::gett('pengelola',[PengelolaController::class,'index']);
+Route::post('pengelola/login',[PengelolaController::class,'login']);
+Route::get('pengelola/logout',[PengelolaController::class,'login']);
