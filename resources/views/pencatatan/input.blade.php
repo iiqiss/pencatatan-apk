@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{asset('bootstrap2/css/bootstrap.css')}}">
 </head>
 <body>
-<form action="" method="post">
+<form action="{{ route('pencatatan.klik') }}" method="post">
     @csrf 
     <div class="row">
         <div class="col-12">

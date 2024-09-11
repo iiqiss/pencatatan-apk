@@ -29,6 +29,7 @@ return new class extends Migration
             $table->foreign('nip')->references('nip')->on('pengelola');
             $table->foreignid('id_skpd');
             $table->foreign('id_skpd')->references('id_skpd')->on('skpd');
+            $table->timestamps();
         });
     }
 
