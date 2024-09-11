@@ -19,8 +19,27 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route :: get ('skpd',  [ App\Http\Controllers\SkpdController::class, 'index']);
+Route::resource ('skpd', [SkpdController::class]);
 Route::get('/login',[PengelolaController::class,'index']);
-Route::gett('pengelola',[PengelolaController::class,'index']);
+Route::get('pengelola',[PengelolaController::class,'index']);
 Route::post('pengelola/login',[PengelolaController::class,'login']);
-Route::get('pengelola/logout',[PengelolaController::class,'login']);
+Route::get('pengelola/logout',[PengelolaController::class,'logout']);
+ 
+Route::get('dashboard',function () {
+    return view('dashboard');
+})->name('dashboard');
+Route::get('/charts', function () {
+    return view('charts');
+})->name('charts');
+Route::get('/tables', function () {
+    return view('tables');
+})->name('tables');
+
+Route::get('/tables', [PengelolaController::class, 'tables'])->name('tables');
+Route::get('/tables/pengelola',[PengelolaController::class,'pengelola'])->name('pencatatan.pengelola');
+Route::get('/tables/input',[PengelolaController::class,'input'])->name('pencatatan.input');
+Route::get('/tables/tambah tables',[PengelolaController::class,'tambah'])->name('pencatatan.tambah');
+Route::post('/tables/submit', [PengelolaController::class, 'submit'])->name('pencatatan.submit');
+Route::post('/tables/tambah tables', [PengelolaController::class, 'tambah'])->name('pencatatan.tambah');
+Route::get('/tables/input',[PengelolaController::class,'input'])->name('pencatatan.input');
+

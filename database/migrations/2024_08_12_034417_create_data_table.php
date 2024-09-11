@@ -14,21 +14,21 @@ return new class extends Migration
     public function up()
     {
         Schema::create('data', function (Blueprint $table) {
-            $table->id('Id_data');
-            $table->integer('Tahun_pengumpulan');
-            $table->date('Tanggal_pengumpulan');
-            $table->enum('Status_pengumpulan',['belum','sudah','sedang dikerjakan']);
-            $table->string('Keterangan_pengumpulan');
-            $table->string('Judul_publikasi');
-            $table->text('Link_publikasi');
-            $table->string('Metadata');
-            $table->text('Link_metadata');
+            $table->id('id_data');
+            $table->integer('tahun_pengumpulan');
+            $table->date('tanggal_pengumpulan');
+            $table->enum('status_pengumpulan',['belum','sudah','sedang dikerjakan']);
+            $table->string('keterangan_pengumpulan');
+            $table->string('judul_publikasi');
+            $table->text('link_publikasi');
+            $table->string('metadata');
+            $table->text('link_metadata');
             $table->string('rekomendasi');
-            $table->text('Link_rekomendasi');
-            $table->foreignid('NIP');
-            $table->foreign('NIP')->references('NIP')->on('pengelola');
-            $table->foreignid('Id_skpd');
-            $table->foreign('Id_skpd')->references('Id_skpd')->on('skpd');
+            $table->text('link_rekomendasi');
+            $table->foreignid('nip');
+            $table->foreign('nip')->references('nip')->on('pengelola');
+            $table->foreignid('id_skpd');
+            $table->foreign('id_skpd')->references('id_skpd')->on('skpd');
         });
     }
 

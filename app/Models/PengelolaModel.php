@@ -9,12 +9,12 @@ class PengelolaModel extends Model
 {
     use HasFactory;
     protected $table = 'pengelola';
-    protected $primaryKey = 'NIP';
-    protected $fillable = ['Nama_pengelola','Kontak_pengelola','Nama_dinas'];
+    protected $primaryKey = 'nip';
+    protected $fillable = ['nama_pengelola','kontak_pengelola','nama_dinas'];
     public function data (){
         return $this->hasMany(data::class);
     }
     public function skpd (){
-        return $this->belongsTo(skpd::class);
+        return $this->belongsTo(skpdModel::class);
     }
 }
