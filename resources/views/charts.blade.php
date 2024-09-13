@@ -63,25 +63,7 @@
 
     <!-- Project Card Example -->
 
-    <div class="card shadow mb-16" style= "width: 205%;">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
-        </div>
-        <div class="card-body">
-            <h4 class="small font-weight-bold">Belum Mengumpulkan<span
-                    class="float-right">45%</span></h4>
-            <div class="progress mb-4">
-                <div class="progress-bar bg-danger" role="progressbar" style="width: 45%"
-                    aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-            <h4 class="small font-weight-bold">Sudah Dikumpulkan<span
-                    class="float-right">55%</span></h4>
-            <div class="progress">
-                <div class="progress-bar bg-success" role="progressbar" style="width: 55%"
-                    aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-        </div>
-    </div>
+   
  
     <!-- Color System -->
 </div>

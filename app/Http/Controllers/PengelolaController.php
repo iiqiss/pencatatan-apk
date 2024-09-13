@@ -17,7 +17,7 @@ class PengelolaController extends Controller
 {
 
     public function index(){
-        return view('sesi/index');
+       
 }
 
 

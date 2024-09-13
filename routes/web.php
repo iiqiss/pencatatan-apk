@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SkpdController;
 use App\Http\Controllers\PengelolaController;
 use Illuminate\Support\Facades\Route;
@@ -19,13 +20,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource ('skpd', [SkpdController::class]);
-Route::get('/login',[PengelolaController::class,'index']);
-Route::get('pengelola',[PengelolaController::class,'index']);
-Route::post('pengelola/login',[PengelolaController::class,'login']);
-Route::get('pengelola/logout',[PengelolaController::class,'logout']);
+/*Route::resource ('skpd', [SkpdController::class]);*/
+
  
-Route::get('dashboard',function () {
+Route::get('',function () {
     return view('dashboard');
 })->name('dashboard');
 Route::get('/charts', function () {
@@ -34,6 +32,10 @@ Route::get('/charts', function () {
 Route::get('/tables', function () {
     return view('tables');
 })->name('tables');
+
+Route::get('/login',[AuthController::class,'ShowLoginForm'])->name('login');
+Route::get('/sesi',[AuthController::class,'login'])->name('login.submit');
+Route::post('/logout', [AuthController::class, 'ShowLoginForm'])->name('logout');
 
 Route::get('/tables', [PengelolaController::class, 'tables'])->name('tables');
 Route::get('/tables/pengelola',[PengelolaController::class,'pengelola'])->name('pencatatan.pengelola');
