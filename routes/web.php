@@ -25,11 +25,12 @@ Route::get('/tables', function () {
     return view('tables');
 })->name('tables');
 Route::get('/tables', [PengelolaController::class, 'tables'])->name('tables');
-Route::get('/tables/input',[PengelolaController::class,'input'])->name('pencatatan.input');
+Route::get('/tables/input/{id_skpd}',[PengelolaController::class,'input'])->name('pencatatan.input');
 Route::post('/tables/klik', [PengelolaController::class, 'klik'])->name('pencatatan.klik');
 Route::post('/tables/submit', [PengelolaController::class, 'submit'])->name('pencatatan.submit');
-Route::get('/tables/tambah tables',[PengelolaController::class,'tambah'])->name('pencatatan.tambah');
-Route::get('/tables/pengelola',[Pengelola2Contoller::class,'pengelola'])->name('pencatatan.pengelola');
-Route::get('/tables/hubungi',[Pengelola2Contoller::class,'hubungi'])->name('pencatatan.hubungi');
+Route::get('/tables/tambahtables',[PengelolaController::class,'tambah'])->name('pencatatan.tambah');
+Route::get('/tables/pengelola/{id_skpd}',[Pengelola2Contoller::class,'pengelola'])->name('pencatatan.pengelola');
+Route::get('/tables/hubungi/{id_skpd}',[Pengelola2Contoller::class,'hubungi'])->name('pencatatan.hubungi');
+Route::post('/tables/hubungi/{id_skpd}',[Pengelola2Contoller::class,'hubungi'])->name('pencatatan.hubungi');
 Route::post('/tables/enter', [Pengelola2Contoller::class, 'enter'])->name('pencatatan.enter');
-Route ::post('/tables/delete/{id_skpd}',[PengelolaController::class, 'delete'])->name('pencatatan.delete');
+Route::post('/tables/delete/{id_skpd}',[PengelolaController::class, 'delete'])->name('pencatatan.delete');
