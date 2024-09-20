@@ -42,13 +42,16 @@
                         <th>Status</th>
                         <th>Keterangan</th>
                         <th>Tanggal</th>
+                        <th>tahun</th>
                         <th>Dokumen</th>
                         <th>Pengelola</th>
+                        <th>hapus</th>
                     </tr>
                 </thead>
                 <tfoot>
                 </tfoot>
                 <tbody>
+                <?php $no = 1 ?>
                 @foreach($skpd as $no=>$skpd)
                 <tr>
                        <td>{{$no++}}</td>
@@ -57,13 +60,20 @@
                        <td>{{$skpd->status_pengumpulan}}</td>
                        <td>{{$skpd->keterangan_pengumpulan}}</td>
                        <td>{{$skpd->tanggal_pengumpulan}}</td>
+                       <td>{{$skpd->tahun_pengumpulan}}</td>
                        <td>
                         <h1 class="h3 mb-0 text-gray-800"></h1>
-                        <a href="{{route('pencatatan.pengelola',$skpd->id_data)}}" class="d-none d-sm-inline-block btn btn-sm btn-primary">Input</a> 
+                        <a href="{{route('pencatatan.input')}}" class="d-none d-sm-inline-block btn btn-sm btn-primary">Input</a> 
                         </td>
                         <td>
                         <h1 class="h3 mb-0 text-gray-800"></h1>
-                        <a href="{{route('pencatatan.pengelola',$skpd->id_data)}}" class="d-none d-sm-inline-block btn btn-sm btn-primary">Hubungi</a> 
+                        <a href="{{route('pencatatan.hubungi')}}" class="d-none d-sm-inline-block btn btn-sm btn-primary">Hubungi</a> 
+                        </td>
+                        <td>
+                        <form action="{{route('pencatatan.delete',$skpd->id_skpd)}}" method="post">
+                         @csrf
+                         <button class="btn btn-sm btn-danger">Hapus</button>
+                        </form>
                         </td>
                 </tr>
                  @endforeach
@@ -74,4 +84,5 @@
 <!--</div>-->
 
 </div>
+
 @endsection

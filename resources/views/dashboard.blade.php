@@ -5,7 +5,7 @@
 <p class="mb-4">
 <div class="d-flex justify-content-between align-items-center mb-4">
     <div class="d-flex align-items-center">
-        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm ml-3">
+        <a href="{{route('pencatatan.pengelola')}}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm ml-3">
             <i class="fas fa-download fa-sm text-white-50"></i> input
         </a>
     </div>

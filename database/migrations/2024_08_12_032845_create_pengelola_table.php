@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('nama_pengelola');
             $table->bigInteger('kontak_pengelola');
             $table->string('nama_dinas');
+            $table->timestamps();
         });
     }
 

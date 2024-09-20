@@ -34,7 +34,10 @@
                 <div class="card o-hidden border-0 shadow-lg my-5">
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
-                        <div class="row">
+                         <div class="d-flex justify-content-center align-items-center" style="min-height 100vh; widht: 100%;">
+                         
+                         
+                        <div class="row justify-content-center" style="width: 100%;">
                            
                             <div class="col-lg-6">
                                 <div class="p-5">
@@ -75,6 +78,7 @@
                                 </div>
                             </div>
                         </div>
+                     </div>
                     </div>
                 </div>
 
@@ -85,7 +89,7 @@
     </div>
 
     <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
-    <script src=" {{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
     <!-- Core plugin JavaScript-->
     <script src="{{asset('vendor/jquery-easing/jquery.easing.min.js')}}"></script>

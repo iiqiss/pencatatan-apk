@@ -1,8 +1,7 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\SkpdController;
 use App\Http\Controllers\PengelolaController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /* 
@@ -37,11 +36,16 @@ Route::get('/login',[AuthController::class,'ShowLoginForm'])->name('login');
 Route::get('/sesi',[AuthController::class,'login'])->name('login.submit');
 Route::post('/logout', [AuthController::class, 'ShowLoginForm'])->name('logout');
 
+
 Route::get('/tables', [PengelolaController::class, 'tables'])->name('tables');
-Route::get('/tables/pengelola',[PengelolaController::class,'pengelola'])->name('pencatatan.pengelola');
 Route::get('/tables/input',[PengelolaController::class,'input'])->name('pencatatan.input');
-Route::get('/tables/tambah tables',[PengelolaController::class,'tambah'])->name('pencatatan.tambah');
+Route::post('/tables/klik', [PengelolaController::class, 'klik'])->name('pencatatan.klik');
 Route::post('/tables/submit', [PengelolaController::class, 'submit'])->name('pencatatan.submit');
-Route::post('/tables/tambah tables', [PengelolaController::class, 'tambah'])->name('pencatatan.tambah');
+Route::get('/tables/tambah_tables',[PengelolaController::class,'tambah'])->name('pencatatan.tambah');
+Route::post('/tables/submit', [PengelolaController::class, 'submit'])->name('pencatatan.submit');
+Route::post('/tables/tambah_tables', [PengelolaController::class, 'tambah'])->name('pencatatan.tambah');
 Route::get('/tables/input',[PengelolaController::class,'input'])->name('pencatatan.input');
+Route::get('/tables/pengelola',[PengelolaController::class])->name('pencatatan.pengelola');
+Route::get('/tables/hubungi',[Pengelola2Controller::class])->name('pencatatan.hubungi');
+Route::delete('/tables/delete/{id_skpd}',[PengelolaController::class,'delete'])->name('pencatatan.delete');
 
