@@ -13,16 +13,19 @@ class AuthController extends Controller
 {
     public function showLoginForm()
     {
+        
         return view('sesi.login');
     }
     
+    
 public function login (request $request){
+
 
     $validator = Validator::make($request->all(), [
         'email' => 'required',
         'password' => 'required',
     ]);
-
+ 
     [
         'email'=>'Email wajib diisi',
         'Password'=>'Password wajib diisi',
@@ -32,11 +35,12 @@ public function login (request $request){
         'email'=>$request->email,
         'Password'=>$request->password,
     ];
+    
     if (Auth::attempt($validator)) {
-        return redirect('skpd')->with('success','Berhasil login'); 
+        return redirect()->route('dashboard'); 
     }
-    else {
-        return redirect('skpd')->with('error','email dan password yang diasukan tidak valid');
+    else { 
+        return redirect()->route('login');
     }
 }
 public function logout(){
@@ -45,7 +49,7 @@ public function logout(){
     $request->session()->invalidate();
     $request->session()->regenerateToken();
 
-    return redirect('/login');
+    return redirect()->route('/login');
 }
 }
 
