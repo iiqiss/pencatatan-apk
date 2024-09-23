@@ -1,5 +1,5 @@
 
-@extends('layouts/app')
+@extends('layouts.app')
 @section('content')
 <div class="container-fluid">
 
@@ -30,8 +30,7 @@
                             <td>{{ $item->nama_pengelola }}</td>
                             <td>{{ $item->kontak_pengelola }}</td>
                             <td>{{ $item->nama_dinas }}</td>
-                        </tr>
-              
+                        </tr>             
                 </thead>
             </table>
        </div>

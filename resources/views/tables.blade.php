@@ -54,7 +54,7 @@
                 <?php $no = 1 ?>
                 @foreach($skpd as $no=>$skpd)
                 <tr>
-                       <td>{{$no++}}</td>
+                       <td>{{$no+ 1}}</td>
                        <td>{{$skpd->nama_skpd}}</td>
                        <td>{{$skpd->alamat_skpd}}</td>
                        <td>{{$skpd->status_pengumpulan}}</td>
@@ -70,8 +70,9 @@
                         <a href="{{route('pencatatan.hubungi')}}" class="d-none d-sm-inline-block btn btn-sm btn-primary">Hubungi</a> 
                         </td>
                         <td>
-                        <form action="{{route('pencatatan.delete',$skpd->id_skpd)}}" method="post">
+                        <form action="{{route('pencatatan.delete',$skpd->id_skpd)}}" method="POST" style="display inline-block">
                          @csrf
+                         @method('DELETE')
                          <button class="btn btn-sm btn-danger">Hapus</button>
                         </form>
                         </td>

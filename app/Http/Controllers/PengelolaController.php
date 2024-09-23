@@ -2,9 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\user;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Pengelola;
 use App\Http\Controllers\Controller;
 
@@ -53,7 +50,7 @@ class PengelolaController extends Controller
         return view('pencatatan.input');
     }
     public function klik(Request $request){
-        $validateData =$request->validate([
+       /* $validateData =$request->validate([
             'tahun_pengumpulan' =>'required',
             'tanggal_pengumpulan' => 'required',
             'keterangan_pengumpulan' => 'required',
@@ -62,7 +59,7 @@ class PengelolaController extends Controller
             'link_metadata' => 'required',
             'link_rekomendasi' => 'required',
 
-        ]);
+        ]);*/
         $skpd = new data();
         $skpd->tahun_pengumpulan = $request->tahun_pengumpulan;
         $skpd->tanggal_pengumpulan = $request->tanggal_pengumpulan;
@@ -96,11 +93,9 @@ class PengelolaController extends Controller
     
     public function delete($id)
     {
-        //
-        $skpd = skpdModel::find($id);
+        $skpd = skpdModel::findOrFail($id);
         $skpd->delete();
-        return redirect()->route('tables');
-        
+        return redirect('tables');   
     }
 
 
@@ -156,9 +151,8 @@ class PengelolaController extends Controller
      * @param  \App\Models\PengelolaModel  $pengelolaModel
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PengelolaModel $pengelolaModel)
+    public function destroy($id)
     {
-        //
 
     }
 }

@@ -20,7 +20,6 @@ class Pengelola2Contoller extends Controller
     }
     public function pengelola()
     {
-        //
         $pengelola = PengelolaModel::all();
         return view('pencatatan.pengelola',['pengelola' => $pengelola]);
     }
@@ -42,11 +41,9 @@ class Pengelola2Contoller extends Controller
     return redirect()->route('pencatatan.hubungi');
 }
     public function hubungi()
-    {
-        //
-
-        return view('pencatatan.hubungi');
-    }
+     {
+        return view('pencatatan.hubungi',compact ('pengelola'));
+     }
 
     /**
      * Show the form for creating a new resource.

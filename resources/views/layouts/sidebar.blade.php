@@ -28,11 +28,6 @@
 <!-- Heading -->
 <!-- Nav Item - Pages Collapse Menu -->
 <!-- Nav Item - Charts -->
-<hr class="sidebar-divider my-0">
-<li class="nav-item active">
-    <a class="nav-link" href="{{route('charts')}}">
-        <i class="fas fa-fw fa-chart-area"></i>
-        <span>Charts</span></a>
 </li>
 
 <!-- Nav Item - Tables -->

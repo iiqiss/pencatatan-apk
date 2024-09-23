@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{asset('bootstrap2/css/bootstrap.css')}}">
 </head>
 <body>
-<form action="{{ route('pencatatan.klik') }}" method="post">
+<form action="{{route('pencatatan.klik')}}" method="POST">
     @csrf 
     <div class="row">
         <div class="col-12">
@@ -30,11 +30,11 @@
                     <label>Link Metadata</label>
                     <input type="url" name="link_metadata" class="form-control mb-2">
                     <label>Link Rekomendasi</label>
-                    <input type="url" name="link_rekomedasi" class="form-control mb-2">
+                    <input type="url" name="link_rekomendasi" class="form-control mb-2">
                 </div>
             </div>
             <div class="card-footer">
-                <button type="submit"class="btn btn-primary ">Input</button>
+                <button type="submit"class="btn btn-primary">Input</button>
             </div>
             </div>
         </div>
