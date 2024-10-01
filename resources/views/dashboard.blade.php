@@ -4,13 +4,6 @@
 <h1 class="h3 mb-2 text-gray-800">Dashboard</h1>
 <p class="mb-4">
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <div class="d-flex align-items-center">
-        <a href="{{route('pencatatan.pengelola')}}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm ml-3">
-            <i class="fas fa-download fa-sm text-white-50"></i> input
-        </a>
-    </div>
-    <div class="d-flex align-items-center">
-    <h1 class="h3 mb-0 text-gray-800"></h1>
     <div class="btn-group ml-auto">
         <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Tahun
@@ -20,7 +13,6 @@
             <a class="dropdown-item" href="#">2023</a>
             <a class="dropdown-item" href="#">2022</a>
         </div>
-    </div>
     </div>
 </div>
 

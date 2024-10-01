@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\data;
 use App\Models\skpdModel;
-use App\Models\PengelolaModel;
 use Illuminate\Http\Request;
 
 class Pengelola2Contoller extends Controller
@@ -18,35 +17,35 @@ class Pengelola2Contoller extends Controller
     {
         //
     }
-    public function pengelola()
+    public function pengelola($id)
     {
         //
-        $pengelola = PengelolaModel::all();
-        return view('pencatatan.pengelola',['pengelola' => $pengelola]);
+        $skpd = skpdModel::find($id);
+        return view('pencatatan.pengelola',compact('skpd'));
     }
-    public function enter(Request $request)
+    public function enter(Request $request,$id)
 {
     $validateData =$request->validate([
-        'nip' =>'required|unique:pengelola,nip',
+        'nip' =>'required',
         'nama_pengelola' => 'required',
         'kontak_pengelola' => 'required',
-        'nama_dinas' => 'required',
     ]);
-    $pengelola = new PengelolaModel();
-    $pengelola->nip = $request->nip;
-    $pengelola->nama_pengelola = $request->nama_pengelola;
-    $pengelola->kontak_pengelola = $request->kontak_pengelola;
-    $pengelola->nama_dinas = $request->nama_dinas;
-    $pengelola->save();
+    $skpd = skpdModel::find($id);
+    $skpd->nip = $request->nip;
+    $skpd->nama_pengelola = $request->nama_pengelola;
+    $skpd->kontak_pengelola = $request->kontak_pengelola;
+    $skpd->save();
 
     return redirect()->route('pencatatan.hubungi');
 }
-    public function hubungi()
-    {
-        //
+public function hubungi($id)
+{
 
-        return view('pencatatan.hubungi');
-    }
+    $skpd = skpdModel::where('id_skpd',$id)->first();
+    //dd($skpd);
+    return view('pencatatan.hubungi', compact('skpd'));
+    
+}
 
     /**
      * Show the form for creating a new resource.
@@ -75,7 +74,7 @@ class Pengelola2Contoller extends Controller
      * @param  \App\Models\PengelolaModel  $pengelolaModel
      * @return \Illuminate\Http\Response
      */
-    public function show(PengelolaModel $pengelolaModel)
+    public function show(skpdModel $pengelolaModel)
     {
         //
     }
@@ -86,7 +85,7 @@ class Pengelola2Contoller extends Controller
      * @param  \App\Models\PengelolaModel  $pengelolaModel
      * @return \Illuminate\Http\Response
      */
-    public function edit(PengelolaModel $pengelolaModel)
+    public function edit(skpdModel $pengelolaModel)
     {
         //
     }
@@ -98,7 +97,7 @@ class Pengelola2Contoller extends Controller
      * @param  \App\Models\PengelolaModel  $pengelolaModel
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PengelolaModel $pengelolaModel)
+    public function update(Request $request, skpdModel $pengelolaModel)
     {
         //
     }
@@ -109,7 +108,7 @@ class Pengelola2Contoller extends Controller
      * @param  \App\Models\PengelolaModel  $pengelolaModel
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PengelolaModel $pengelolaModel)
+    public function destroy(skpdModel $pengelolaModel)
     {
         //
     }

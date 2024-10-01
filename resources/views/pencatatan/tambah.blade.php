@@ -18,10 +18,17 @@
             <div class="card-body">
                 <div class="form-group">
                 <label>Nama Dinas</label>
-                    <input type="text" name="nama_skpd" class="form-control mb-2">
-                    <label>Alamat Dinas</label>
-                    <input type="text" name="alamat_skpd" class="form-control mb-2">
-
+                <input type="text" name="nama_skpd" class="form-control mb-2" required>
+                <label>Alamat Dinas</label>
+                <input type="text" name="alamat_skpd" class="form-control mb-2" required>
+                <form action="{{route('pencatatan.enter')}}" method="post">
+                <label>NIP</label>
+                <input type="number" name="nip" class="form-control mb-2" required>
+                <label>Nama</label>
+                <input type="text" name="nama_pengelola" class="form-control mb-2" required>
+                <label>Kontak</label>
+                <input type="number" name="kontak_pengelola" class="form-control mb-2" required>
+                </form>
                 </div>
             </div>
             <div class="card-footer">

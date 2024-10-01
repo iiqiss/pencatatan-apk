@@ -16,14 +16,11 @@ class data extends Model
                            'keterangan_pengumpulan',
                            'judul_publikasi',
                            'link_publikasi',
-                           'metadata',
                            'link_metadata',
-                           'rekomendasi',
-                           'link_rekomendasi',];
+                           'link_rekomendasi',
+                           'file',
+                        ];
     public function data (){
-        return $this->belongsTo(data::class);
-    }
-    public function skpd (){
-        return $this->belongsTo(PengelolaModel::class);
+        return $this->belongsTo(skpdModel::class, 'id_skpd', 'id_skpd');
     }
 }

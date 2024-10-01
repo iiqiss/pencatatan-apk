@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\data;
-use App\Models\PengelolaModel;
 use App\Models\skpdModel;
 use Illuminate\Http\Request;
-
 class PengelolaController extends Controller
 {
     /**
@@ -17,51 +15,69 @@ class PengelolaController extends Controller
     public function tables()
     {
         //
-        $skpd = skpdModel::all();
-        return view('tables', compact('skpd'));
-        
+        $skpd = skpdModel::with('data')->get();
+        return view('tables', compact('skpd',));
+
     }
     public function submit(Request $request){
         $validateData =$request->validate([
+            'nip' =>'required',
+            'nama_pengelola' => 'required',
+            'kontak_pengelola' => 'required',
             'nama_skpd' => 'required',
             'alamat_skpd' => 'required',
+
+
         ]);
-        
+
         $skpd = new skpdModel();
+        $skpd->nip = $request->nip;
+        $skpd->nama_pengelola = $request->nama_pengelola;
+        $skpd->kontak_pengelola = $request->kontak_pengelola;
         $skpd->nama_skpd = $request->nama_skpd;
         $skpd->alamat_skpd = $request->alamat_skpd;
-    
+
         $skpd->save();
         return redirect()->route('tables');
     }
-     public function input()
+     public function input($id)
     {
         //
-
-        return view('pencatatan.input');
+        $skpd = skpdModel::find($id);
+        return view('pencatatan.input',compact('skpd'));
     }
-    public function klik(Request $request){
-        $validateData =$request->validate([
-            'tahun_pengumpulan' =>'required',
-            'tanggal_pengumpulan' => 'required',
-            'keterangan_pengumpulan' => 'required',
-            'judul_publikasi' => 'required',
-            'link_publikasi' => 'required',
-            'link_metadata' => 'required',
-            'link_rekomendasi' => 'required',
+    public function klik(Request $request,$id){
+        if ($request->hasFile('file')) {
+            
+            $file = $request->file('file');
+            $file_ekstensi = $file->extension();
+            $file_nama = date('ymdhis') . "." . $file_ekstensi;
+            
+            $file->move(public_path('file'), $file_nama);
+        } else {
+            
+            $file_nama = null;
+        }
 
-        ]);
-        $skpd = new data();
-        $skpd->tahun_pengumpulan = $request->tahun_pengumpulan;
-        $skpd->tanggal_pengumpulan = $request->tanggal_pengumpulan;
-        $skpd->keterangan_pengumpulan = $request->keterangan_pengumpulan;
-        $skpd->judul_publikasi = $request->judul_publikasi;
-        $skpd->link_publikasi = $request->link_publikasi;
-        $skpd->link_metadata = $request->link_metadata;
-        $skpd->link_rekomendasi = $request->link_rekomendasi;
-    
-        $skpd->save();
-        return redirect()->route('tables');
+        $data = new data();
+        $data->id_skpd = $id;
+        $data->tahun_pengumpulan = $request->tahun_pengumpulan;
+        $data->tanggal_pengumpulan = $request->tanggal_pengumpulan;
+        $data->keterangan_pengumpulan = $request->keterangan_pengumpulan;
+        $data->judul_publikasi = $request->judul_publikasi;
+        $data->link_publikasi = $request->link_publikasi;
+        $data->link_metadata = $request->link_metadata;
+        $data->link_rekomendasi = $request->link_rekomendasi;
+        $data->file = $file_nama;
+
+        if($request->status_pengumpulan == 'sudah') {
+            $data->status_pengumpulan = 'sudah';
+        } elseif($request->status_pengumpulan == 'sedang_dikerjakan') {
+            $data->status_pengumpulan = 'sedang_dikerjakan';
+        }
+
+        $data->save();
+        return redirect()->route('tables',compact('data'));
     }
 
     /**
@@ -69,24 +85,70 @@ class PengelolaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+   
 
+    
     public function tambah()
     {
         //
         return view('pencatatan.tambah');
     }
-   
-    
+
+
     public function delete($id)
     {
-        //
+       
         $skpd = skpdModel::find($id);
-        $skpd->delete();
-        return redirect()->route('tables');
         
+        if ($skpd) {
+          
+            $skpd->data()->delete(); 
+            $skpd->delete();
+        }
+    
+        return redirect()->route('tables')->with('success', 'Data berhasil dihapus.');
     }
-
-
+    
+    public function update2($id)
+    {
+        //
+        $data = data::find($id);
+        return view('pencatatan.update',compact('data'));
+    }
+    public function update3(Request $request, $id) {
+        
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $file_ekstensi = $file->extension();
+            $file_nama = time() . "." . $file_ekstensi;
+    
+            $file->move(public_path('file'), $file_nama);
+        } else {
+            $file_nama = null; 
+        }
+    
+      
+        $data = data::where('id_data', $id)->first();
+        $data->tahun_pengumpulan = $request->tahun_pengumpulan;
+        $data->tanggal_pengumpulan = $request->tanggal_pengumpulan;
+        $data->keterangan_pengumpulan = $request->keterangan_pengumpulan;
+        $data->judul_publikasi = $request->judul_publikasi;
+        $data->link_publikasi = $request->link_publikasi;
+        $data->link_metadata = $request->link_metadata;
+        $data->link_rekomendasi = $request->link_rekomendasi;
+        $data->file = $file_nama;
+    
+        if ($request->status_pengumpulan == 'sudah') {
+            $data->status_pengumpulan = 'sudah';
+        } elseif ($request->status_pengumpulan == 'sedang_dikerjakan') {
+            $data->status_pengumpulan = 'sedang_dikerjakan';
+        }
+    
+        $data->save();
+    
+        return redirect()->route('tables', compact('data'));
+    }
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -97,7 +159,7 @@ class PengelolaController extends Controller
     {
         //
     }
-    
+
 
     /**
      * Display the specified resource.
@@ -105,7 +167,7 @@ class PengelolaController extends Controller
      * @param  \App\Models\PengelolaModel  $pengelolaModel
      * @return \Illuminate\Http\Response
      */
-    public function show(PengelolaModel $pengelolaModel)
+    public function show(skpdModel $pengelolaModel)
     {
         //
     }
@@ -116,7 +178,7 @@ class PengelolaController extends Controller
      * @param  \App\Models\PengelolaModel  $pengelolaModel
      * @return \Illuminate\Http\Response
      */
-    public function edit(PengelolaModel $pengelolaModel)
+    public function edit(skpdModel $pengelolaModel)
     {
         //
     }
@@ -128,7 +190,7 @@ class PengelolaController extends Controller
      * @param  \App\Models\PengelolaModel  $pengelolaModel
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PengelolaModel $pengelolaModel)
+    public function updat(Request $request, skpdModel $pengelolaModel)
     {
         //
     }
@@ -139,7 +201,7 @@ class PengelolaController extends Controller
      * @param  \App\Models\PengelolaModel  $pengelolaModel
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PengelolaModel $pengelolaModel)
+    public function destroy(skpdModel $pengelolaModel)
     {
         //
     }

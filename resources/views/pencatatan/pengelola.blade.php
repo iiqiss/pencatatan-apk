@@ -18,19 +18,15 @@
             <div class="card-body">
                 <div class="form-group">
                     <label>NIP</label>
-                    <input type="number" name="nip" class="form-control mb-2">
+                    <input type="number" name="nip" class="form-control mb-2" required>
                     <label>Nama</label>
-                    <input type="text" name="nama_pengelola" class="form-control mb-2">
+                    <input type="text" name="nama_pengelola" class="form-control mb-2" required>
                     <label>Kontak</label>
-                    <input type="number" name="kontak_pengelola" class="form-control mb-2">
-                    <label>Nama Dinas</label>
-                    <input type="text" name="nama_dinas" class="form-control mb-2">
+                    <input type="number" name="kontak_pengelola" class="form-control mb-2" required>
                 </div>
             </div>
             <div class="card-footer d-flex justify-content-between align-items-center">
                 <button type="submit"class="btn btn-primary ">Kirim</button>
-                <h1 class="h3 mb-0 text-gray-800"></h1>
-                 <a href="{{route('pencatatan.input')}}" class="d-none d-sm-inline-block btn btn-sm btn-primary">selanjutnya</a> 
             </div>
             </div>
         </div>
