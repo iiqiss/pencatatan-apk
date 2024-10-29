@@ -11,15 +11,15 @@ use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
+
     public function showLoginForm()
     {
-        
         return view('sesi.login');
     }
     
     
 public function login (request $request){
-
+       //  Login::flash('email',$request->email);
 
     $validator = Validator::make($request->all(), [
         'email' => 'required',
@@ -44,12 +44,21 @@ public function login (request $request){
     }
 }
 public function logout(){
-    Auth::logout();   
+    Auth::guard('web')->logout();   
 
     $request->session()->invalidate();
-    $request->session()->regenerateToken();
 
     return redirect()->route('/login');
 }
+ 
+
+
+
+
+
+
+
+
+
 }
 
