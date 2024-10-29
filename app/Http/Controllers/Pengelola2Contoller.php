@@ -46,15 +46,15 @@ public function hubungi($id)
     return view('pencatatan.hubungi', compact('skpd'));
     
 }
-public function tampil($id)
-{
-    $data = Data::where('id_data', $id)->first();
-    $status = Status::where('id_status', $id)->first(); 
-    if (!$status) {
-        session()->flash('alert', 'Pastikan Anda telah mengonfirmasi status.');
-    }
-    return view('pencatatan.tampil', compact('status'));
-}
+// public function tampil($id)
+// {
+//     $data = Data::where('id_data', $id)->first();
+//     $status = Status::where('id_status', $id)->first(); 
+//     if (!$status) {
+//         session()->flash('alert', 'Pastikan Anda telah mengonfirmasi status.');
+//     }
+//     return view('pencatatan.tampil', compact('status'));
+// }
 public function tap(Request $request,$id)
 {
     $status = data::find($id);
@@ -73,11 +73,11 @@ public function tap(Request $request,$id)
     public function input2($id)
     {
         //
-        $status = status::find($id);
-        if (!$status) {
-            return view('status')->with('error', 'Pastikan Anda telah mengonfirmasi status.');
+        $data = skpdModel::find($id);
+        if (!$data) {
+            return view('data')->with('error', 'Pastikan Anda telah mengonfirmasi status.');
         }
-        return view('pencatatan.input2',compact('status'));
+        return view('pencatatan.input2',compact('data'));
     }
     public function nott(Request $request,$id)
     {
@@ -94,11 +94,13 @@ public function tap(Request $request,$id)
         }
 
         $data = new data();
-        $data->id_status = $id;
+        $data->id_skpd = $id;
+        $data->tahun_pengumpulan = $request->tahun_pengumpulan;
         $data->judul_publikasi = $request->judul_publikasi;
         $data->link_publikasi = $request->link_publikasi;
         $data->link_metadata = $request->link_metadata;
         $data->link_rekomendasi = $request->link_rekomendasi;
+        $data->keterangan_pengumpulan = $request->keterangan_pengumpulan;
         $data->file = $file_nama;
         $data->save();
         return redirect()->route('pencatatan.lihat', ['id' => $id]);

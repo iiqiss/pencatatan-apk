@@ -48,6 +48,7 @@
                     @foreach($data as $d)
                         <tr>
                             <td>{{$no++}}</td>
+                            <td>{{$d->tahun_pengumpulan}}</td>
                             <td>
                                 @if ($d->file)
                                     <a href="{{ asset('file/' . $d->file) }}">Lihat Dokumen</a>
@@ -59,7 +60,8 @@
                             <td><a href="{{ $d->link_publikasi }}">{{ $d->link_publikasi }}</a></td>
                             <td><a href="{{ $d->link_metadata }}">{{ $d->link_metadata }}</a></td>
                             <td><a href="{{ $d->link_rekomendasi }}">{{ $d->link_rekomendasi }}</a></td>
-
+                            <td></td>
+                            <td>{{$d->keterangan_pengumpulan}}</td>
                         </tr>
                     @endforeach
                 </tbody>
