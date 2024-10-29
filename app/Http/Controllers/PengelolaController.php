@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\data;
 use App\Models\skpdModel;
+use App\Models\status;
 use Illuminate\Http\Request;
 class PengelolaController extends Controller
 {
@@ -12,13 +13,31 @@ class PengelolaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function tables()
+    public function tables(Request $request)
     {
-        //
-        $skpd = skpdModel::with('data')->get();
-        return view('tables', compact('skpd',));
+        $query = skpdModel::query();
+    
+        if ($request->has('filter')) {
+            $filter = $request->input('filter');
+    
+            if ($filter == 'terbaru') {
+                $query->orderBy('created_at', 'DESC');
+            } elseif ($filter == 'tahun') {
+                $currentYear = date('Y');
+                $query->whereYear('created_at', $currentYear);
+            }
+        } else {
 
+            $query->orderBy('created_at', 'DESC');
+        }
+    
+      
+        $skpd = $query->get();
+    
+        return view('tables', compact('skpd'));
     }
+    
+
     public function submit(Request $request){
         $validateData =$request->validate([
             'nip' =>'required',
@@ -38,46 +57,7 @@ class PengelolaController extends Controller
         $skpd->alamat_skpd = $request->alamat_skpd;
 
         $skpd->save();
-        return redirect()->route('tables');
-    }
-     public function input($id)
-    {
-        //
-        $skpd = skpdModel::find($id);
-        return view('pencatatan.input',compact('skpd'));
-    }
-    public function klik(Request $request,$id){
-        if ($request->hasFile('file')) {
-            
-            $file = $request->file('file');
-            $file_ekstensi = $file->extension();
-            $file_nama = date('ymdhis') . "." . $file_ekstensi;
-            
-            $file->move(public_path('file'), $file_nama);
-        } else {
-            
-            $file_nama = null;
-        }
-
-        $data = new data();
-        $data->id_skpd = $id;
-        $data->tahun_pengumpulan = $request->tahun_pengumpulan;
-        $data->tanggal_pengumpulan = $request->tanggal_pengumpulan;
-        $data->keterangan_pengumpulan = $request->keterangan_pengumpulan;
-        $data->judul_publikasi = $request->judul_publikasi;
-        $data->link_publikasi = $request->link_publikasi;
-        $data->link_metadata = $request->link_metadata;
-        $data->link_rekomendasi = $request->link_rekomendasi;
-        $data->file = $file_nama;
-
-        if($request->status_pengumpulan == 'sudah') {
-            $data->status_pengumpulan = 'sudah';
-        } elseif($request->status_pengumpulan == 'sedang_dikerjakan') {
-            $data->status_pengumpulan = 'sedang_dikerjakan';
-        }
-
-        $data->save();
-        return redirect()->route('tables',compact('data'));
+        return redirect()->route('tables')->with('success', 'Data berhasil disimpan!');
     }
 
     /**
@@ -109,45 +89,8 @@ class PengelolaController extends Controller
         return redirect()->route('tables')->with('success', 'Data berhasil dihapus.');
     }
     
-    public function update2($id)
-    {
-        //
-        $data = data::find($id);
-        return view('pencatatan.update',compact('data'));
-    }
-    public function update3(Request $request, $id) {
-        
-        if ($request->hasFile('file')) {
-            $file = $request->file('file');
-            $file_ekstensi = $file->extension();
-            $file_nama = time() . "." . $file_ekstensi;
+  
     
-            $file->move(public_path('file'), $file_nama);
-        } else {
-            $file_nama = null; 
-        }
-    
-      
-        $data = data::where('id_data', $id)->first();
-        $data->tahun_pengumpulan = $request->tahun_pengumpulan;
-        $data->tanggal_pengumpulan = $request->tanggal_pengumpulan;
-        $data->keterangan_pengumpulan = $request->keterangan_pengumpulan;
-        $data->judul_publikasi = $request->judul_publikasi;
-        $data->link_publikasi = $request->link_publikasi;
-        $data->link_metadata = $request->link_metadata;
-        $data->link_rekomendasi = $request->link_rekomendasi;
-        $data->file = $file_nama;
-    
-        if ($request->status_pengumpulan == 'sudah') {
-            $data->status_pengumpulan = 'sudah';
-        } elseif ($request->status_pengumpulan == 'sedang_dikerjakan') {
-            $data->status_pengumpulan = 'sedang_dikerjakan';
-        }
-    
-        $data->save();
-    
-        return redirect()->route('tables', compact('data'));
-    }
     
     /**
      * Store a newly created resource in storage.

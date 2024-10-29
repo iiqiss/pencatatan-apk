@@ -7,6 +7,14 @@
     <link rel="stylesheet" href="{{asset('bootstrap2/css/bootstrap.css')}}">
 </head>
 <body>
+
+<div class="container mt-5">
+
+@if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
 <form action="{{ route('pencatatan.klik', ['id_skpd' => $skpd->id_skpd]) }}" method="post"  enctype="multipart/form-data">
     @csrf 
     <div class="row">
@@ -17,13 +25,9 @@
             </div>
             <div class="card-body">
                 <div class="form-group">
-                    <input type="hidden" name="id_skpd" value="{{ $skpd->id_skpd}}">
-                    <label>Tahun Pengumpulan</label>
-                    <input type="number" name="tahun_pengumpulan" class="form-control mb-2">
-                    <label>Tanggal Pengumpulan</label>
-                    <input type="date" name="tanggal_pengumpulan" class="form-control mb-2">
+                    <input type="hidden" name="id_skpd" value="{{ $skpd->id_skpd}}" required>
                     <label>Status Pengumpulan</label>
-                    <select name="status_pengumpulan" class="form-control">
+                    <select name="status_pengumpulan" class="form-control" required>
                     <option value="" disabled selected>Pilih salah satu</option>
                     <option value="sedang_dikerjakan">Sedang Dikerjakan</option>
                     <option value="sudah">Sudah</option>
@@ -31,17 +35,14 @@
                     <label>Keterangan</label>
                     <input type="text" name="keterangan_pengumpulan" class="form-control mb-2">
                     <div class="form-group">
-                    <label for="file">Input File</label>
-                    <input type="file" name="file" id="file" class="form-control-file" >
-                    </div>
-                    <label>Judul Publikasi</label>
-                    <input type="text" name="judul_publikasi" class="form-control mb-2">
-                    <label>Link Publikasi</label>
-                    <input type="url" name="link_publikasi" class="form-control mb-2">
-                    <label>Link Metadata</label>
-                    <input type="url" name="link_metadata" class="form-control mb-2">
-                    <label>Link Rekomendasi</label>
-                    <input type="url" name="link_rekomendasi" class="form-control mb-2">
+                <form action="{{route('pencatatan.tap')}}" method="post">
+                <label>NIP</label>
+                <input type="number" name="nip" class="form-control mb-2" required>
+                <label>Nama Karyawan</label>
+                <input type="text" name="nama_karyawan" class="form-control mb-2" required>
+                <label>Kontak Karyawan</label>
+                <input type="number" name="kontak_karyawan" class="form-control mb-2" required>
+                </form>
                 </div>
             </div>
             <div class="card-footer">

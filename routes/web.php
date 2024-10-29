@@ -19,12 +19,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('dashboard');
 })->name('dashboard');
-Route::get('/charts', function () {
-    return view('charts');
-})->name('charts');
+
 Route::get('/tables', function () {
     return view('tables');
 })->name('tables');
+Route::get('/status', function () {
+    return view('status');
+})->name('status');
+
 Route::get('/tables', [PengelolaController::class, 'tables'])->name('tables');
 Route::get('/tables/input/{id_skpd}',[PengelolaController::class,'input'])->name('pencatatan.input');
 Route::post('/tables/klik/{id_skpd}', [PengelolaController::class, 'klik'])->name('pencatatan.klik');
@@ -35,8 +37,16 @@ Route::get('/tables/hubungi/{id_skpd}',[Pengelola2Contoller::class,'hubungi'])->
 Route::post('/tables/hubungi/{id_skpd}',[Pengelola2Contoller::class,'hubungi'])->name('pencatatan.hubungi');
 Route::post('/tables/enter', [Pengelola2Contoller::class, 'enter'])->name('pencatatan.enter');
 Route::post('/tables/delete/{id_skpd}',[PengelolaController::class, 'delete'])->name('pencatatan.delete');
+Route::delete('/tables/delete/{id_skpd}', [PengelolaController::class, 'delete'])->name('pencatatan.delete');
+
 Route::get('/tables/update/{id_skpd}',[PengelolaController::class,'update2'])->name('pencatatan.update');
 Route::post('/update3/{id_skpd}', [PengelolaController::class, 'update3'])->name('pencatatan.update3');
+Route::get('/tables/hubungikaryawan/{id_skpd}',[Pengelola2Contoller::class,'tampil'])->name('pencatatan.tampil');
+Route::post('/tables/hubungikaryawan/{id_skpd}',[Pengelola2Contoller::class,'tampil'])->name('pencatatan.tampil');
+Route::get('/tables/input2/{id_skpd}',[Pengelola2Contoller::class,'input2'])->name('pencatatan.input2');
+Route::get('/tables/lihat/{id}',[Pengelola2Contoller::class,'lihat'])->name('pencatatan.lihat');
+Route::post('/tables/nott/{id}', [Pengelola2Contoller::class, 'nott'])->name('pencatatan.nott');
+Route::post('/tables/tap', [Pengelola2Contoller::class, 'tap'])->name('pencatatan.tap');
 Route::get('/login',[SessionController::class,'index']);
 Route::get('/sesi',[SessionController::class,'index']);
 Route::post('/sesi/login',[SessionController::class,'login']);

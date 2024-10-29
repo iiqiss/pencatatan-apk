@@ -1,5 +1,6 @@
 @extends('layouts/app')
 @section('content')
+
 <div class="container-fluid">
 
 <!-- Page Heading -->
@@ -13,6 +14,25 @@
 <!--<div class="card shadow mb-4">-->
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">DataTables</h6>
+        <div class="d-flex justify-content-end">
+    <div class="dropdown">
+        <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Urutkan
+        </button>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                <form action="{{ route('tables',) }}" method="GET">
+                    <select name="filter" id="filter" class="dropdown-item" onchange="this.form.submit()">
+                        <option value="terbaru" {{ request('filter') == 'terbaru' ? 'selected' : '' }}>Terbaru</option>
+                        <option value="tahun" {{ request('filter') == 'tahun' ? 'selected' : '' }}>Pertahun</option>
+                    </select>
+                </form>
+        </div>
+    </div>
+</div>
+
+
+
+
     </div>
     <div class="card-body">
        <div class="table-responsive">
@@ -27,16 +47,8 @@
                         <th>No</th>
                         <th>Dinas</th>
                         <th>Alamat</th>
-                        <th>Status</th>
-                        <th>Keterangan</th>
-                        <th>Tanggal</th>
-                        <th>tahun</th>
-                        <th>Dokumen</th>
-                        <th>Input</th>
-                        <th>update</th>
-                        <th>Kontak Pengelola</th>
-                        
-                        <th>hapus</th>
+                        <th>Data</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tfoot>
@@ -48,45 +60,20 @@
                        <td>{{$no+1}}</td>
                        <td>{{$skpd->nama_skpd}}</td>
                        <td>{{$skpd->alamat_skpd}}</td>
-                       <td>
-                        @if($skpd->data?->status_pengumpulan == 'sudah')
-                        <span class="badge badge-success">Sudah</span>
-                        @elseif($skpd->data?->status_pengumpulan == 'sedang_dikerjakan')
-                        <span class="badge badge-warning">Sedang Dikerjakan</span>
-                        @else
-                        <span class="badge badge-danger">Belum</span>
-                        @endif
-                       </td>
-                       </td>
-                       <td>{{$skpd->data?->keterangan_pengumpulan}}</td>
-                       <td>{{$skpd->data?->tanggal_pengumpulan}}</td>
-                       <td>{{$skpd->data?->tahun_pengumpulan}}</td>
-                       <td>
-                                    @if ($skpd->data?->file)
-                                        <a href="{{ asset('file/' . $skpd->data->file) }}">Lihat Dokumen</a>
-                                    @else
-                                        Belum Mengumpulkan Dokumen
-                                    @endif
-                       </td>
-                       <td>
-                        <h1 class="h3 mb-0 text-gray-800"></h1>
-                        <a href="{{route('pencatatan.input',$skpd->id_skpd)}}" class="d-none d-sm-inline-block btn btn-sm btn-primary">Input</a> 
-                        </td>
-                        <td>
-                            <h1 class="h3 mb-0 text-gray-800"></h1>
-                            <a href="{{ route('pencatatan.update', $skpd->id_skpd) }}" class="d-none d-sm-inline-block btn btn-sm btn-primary">update</a>
-                        </td>
                         <td>
                         <h1 class="h3 mb-0 text-gray-800"></h1>
-                        <a href="{{route('pencatatan.hubungi',$skpd->id_skpd)}}" class="d-none d-sm-inline-block btn btn-sm btn-primary">Hubungi</a> 
+                        <a href="{{route('pencatatan.lihat',$skpd->id_skpd)}}" class="d-none d-sm-inline-block btn btn-sm btn-primary">Lihat</a> 
                         </td>
                         <td>
-                        <form action="{{route('pencatatan.delete',$skpd->id_skpd)}}" method="post">
+                        <form action="{{ route('pencatatan.delete', $skpd->id_skpd) }}" method="post">
                          @csrf
-                         <button class="btn btn-sm btn-danger">Hapus</button>
-                        </form>
+                         @method('DELETE')
+                         <button class="btn btn-sm btn-danger" id="delete" type="button">Hapus</button>
+                         </form>
                         </td>
+
                 </tr>
+                
                  @endforeach
                 </tbody>
             </table>
@@ -95,5 +82,6 @@
 <!--</div>-->
 
 </div>
+
 
 @endsection

@@ -5,8 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>pengelola</title>
     <link rel="stylesheet" href="{{asset('bootstrap2/css/bootstrap.css')}}">
+    
 </head>
 <body>
+    <div class="container mt-5">
+
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
 <form action="{{route('pencatatan.submit')}}" method="post">
     @csrf 
     <div class="row">

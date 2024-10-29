@@ -21,7 +21,10 @@
                             <td>1</td>
                             <td>{{$skpd->nip}}</td>
                             <td>{{$skpd->nama_pengelola}}</td>
-                            <td>{{$skpd->kontak_pengelola}}</td>
+                            <td>
+                            <a href="sms:{{$skpd->kontak_pengelola}}">SMS</a> | 
+                            <a href="https://wa.me/{{$skpd->kontak_pengelola}}">WhatsApp</a>
+                            </td>
                         </tr>
                         
                     </tbody>
