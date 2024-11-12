@@ -1,3 +1,4 @@
+
 @extends('layouts/app')
 @section('content')
 <div class="container-fluid">
@@ -14,21 +15,18 @@
                         <th>NIP</th>
                         <th>Nama</th>
                         <th>Kontak</th>
-                        </tr>
-                        
+                        <th>Nama Dinas</th>
+                    </tr>
+                    <?php $no = 1 ?>
+                    @foreach($pengelola as $no => $item)
                         <tr>
-                           
-                            <td>1</td>
-                            <td>{{$skpd->nip}}</td>
-                            <td>{{$skpd->nama_pengelola}}</td>
-                            <td>
-                            <a href="sms:{{$skpd->kontak_pengelola}}">SMS</a> | 
-                            <a href="https://wa.me/{{$skpd->kontak_pengelola}}">WhatsApp</a>
-                            </td>
+                            <td>{{ $no + 1 }}</td>
+                            <td>{{ $item->nip }}</td>
+                            <td>{{ $item->nama_pengelola }}</td>
+                            <td>{{ $item->kontak_pengelola }}</td>
+                            <td>{{ $item->nama_dinas }}</td>
                         </tr>
-                        
-                    </tbody>
-                    
+                    @endforeach
                 </thead>
             </table>
        </div>

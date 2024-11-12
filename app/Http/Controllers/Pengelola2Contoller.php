@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\data;
 use App\Models\skpdModel;
-use App\Models\status;
 use Illuminate\Http\Request;
 
 class Pengelola2Contoller extends Controller
@@ -18,53 +17,14 @@ class Pengelola2Contoller extends Controller
     {
         //
     }
-    public function pengelola($id)
-    {
-        //
-        $skpd = skpdModel::find($id);
-        return view('pencatatan.pengelola',compact('skpd'));
-    }
-    public function enter(Request $request,$id)
-{
-    $validateData =$request->validate([
-        'nip' =>'required',
-        'nama_pengelola' => 'required',
-        'kontak_pengelola' => 'required',
-    ]);
-    $skpd = skpdModel::find($id);
-    $skpd->nip = $request->nip;
-    $skpd->nama_pengelola = $request->nama_pengelola;
-    $skpd->kontak_pengelola = $request->kontak_pengelola;
-    $skpd->save();
+    // public function pengelola($id)
+    // {
+    //     //
+    //     $pengelola = PengelolaModel::all();
+    //     return view('pencatatan.pengelola',['pengelola' => $pengelola]);
+    // }
+   
 
-    return redirect()->route('pencatatan.hubungi');
-}
-public function hubungi($id)
-{
-
-    $skpd = skpdModel::where('id_skpd',$id)->first();
-    return view('pencatatan.hubungi', compact('skpd'));
-    
-}
-// public function tampil($id)
-// {
-//     $data = Data::where('id_data', $id)->first();
-//     $status = Status::where('id_status', $id)->first(); 
-//     if (!$status) {
-//         session()->flash('alert', 'Pastikan Anda telah mengonfirmasi status.');
-//     }
-//     return view('pencatatan.tampil', compact('status'));
-// }
-public function tap(Request $request,$id)
-{
-    $status = data::find($id);
-    $status->nip = $request->nip;
-    $status->nama_karyawan = $request->nama_karyawan;
-    $status->kontak_karyawan = $request->kontak_karyawan;
-    $status->save();
-
-    return redirect()->route('pencatatan.tampil');
-}
     /**
      * Show the form for creating a new resource.
      *
@@ -103,24 +63,44 @@ public function tap(Request $request,$id)
         $data->keterangan_pengumpulan = $request->keterangan_pengumpulan;
         $data->file = $file_nama;
         $data->save();
-        return redirect()->route('pencatatan.lihat', ['id' => $id]);
+        return redirect()->route('pencatatan.lihat', ['id_skpd' => $id]);
+
+        
     }
     public function lihat(Request $request, $id_skpd)
-{
-    $filter = $request->input('filter'); 
-
-    $query = Data::where('id_skpd', $id_skpd);
-
-    if ($filter == 'terbaru') {
-        $data = $query->orderBy('created_at', 'desc')->get();
-    } elseif ($filter == 'bulan') {
-        $data = $query->orderByRaw('MONTH(created_at) DESC')->get();
-    } else {
-        $data = $query->orderBy('created_at', 'DESC')->get();
+    {
+        $filter = $request->input('filter'); 
+    
+        $skpd = SkpdModel::find($id_skpd);
+        $data = Data::where('id_skpd', $id_skpd)
+        ->get()
+        ->map(function($item) {
+            if (!$item->file) {
+               
+                $item->status_pengumpulan = 'belum';
+            } elseif (empty($item->judul_publikasi) || empty($item->link_publikasi) || empty($item->link_metadata) || empty($item->link_rekomendasi)) {
+                
+                $item->status_pengumpulan = 'belum_lengkap';
+            } else {
+               
+                $item->status_pengumpulan = 'sudah';
+            }
+            return $item;
+        });
+    
+        if ($filter == 'terbaru') {
+            $data = $data->sortByDesc('created_at');
+        } elseif ($filter == 'terlama') {
+            $data = $data->sortBy('created_at');
+        } elseif ($filter == 'pertahun') {
+            $data = $data->sortBy('tahun_pengumpulan');
+        }
+        
+                
+    
+        return view('pencatatan.lihat', compact('data', 'id_skpd', 'skpd'));
     }
-
-    return view('pencatatan.lihat', compact('data', 'id_skpd',));
-}
+    
 
 
     /**

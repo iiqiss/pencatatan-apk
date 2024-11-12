@@ -2,12 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Pengelola;
+use App\Http\Controllers\Controller;
+
 use App\Models\data;
 use App\Models\skpdModel;
-use App\Models\status;
 use Illuminate\Http\Request;
 class PengelolaController extends Controller
 {
+
+    public function index(){
+       
+}
+
+
     /**
      * Display a listing of the resource.
      *
@@ -57,7 +65,36 @@ class PengelolaController extends Controller
         $skpd->alamat_skpd = $request->alamat_skpd;
 
         $skpd->save();
-        return redirect()->route('tables')->with('success', 'Data berhasil disimpan!');
+        return redirect()->route('tables');
+    }
+     public function input()
+    {
+        //
+
+        return view('pencatatan.input');
+    }
+    public function klik(Request $request){
+        $validateData =$request->validate([
+            'tahun_pengumpulan' =>'required',
+            'tanggal_pengumpulan' => 'required',
+            'keterangan_pengumpulan' => 'required',
+            'judul_publikasi' => 'required',
+            'link_publikasi' => 'required',
+            'link_metadata' => 'required',
+            'link_rekomendasi' => 'required',
+
+        ]);
+        $skpd = new data();
+        $skpd->tahun_pengumpulan = $request->tahun_pengumpulan;
+        $skpd->tanggal_pengumpulan = $request->tanggal_pengumpulan;
+        $skpd->keterangan_pengumpulan = $request->keterangan_pengumpulan;
+        $skpd->judul_publikasi = $request->judul_publikasi;
+        $skpd->link_publikasi = $request->link_publikasi;
+        $skpd->link_metadata = $request->link_metadata;
+        $skpd->link_rekomendasi = $request->link_rekomendasi;
+    
+        $skpd->save();
+        return redirect()->route('tables');
     }
 
     /**
@@ -65,9 +102,7 @@ class PengelolaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-   
 
-    
     public function tambah()
     {
         //
@@ -77,21 +112,14 @@ class PengelolaController extends Controller
 
     public function delete($id)
     {
-       
+        //
         $skpd = skpdModel::find($id);
+        $skpd->delete();
+        return redirect()->route('tables');
         
-        if ($skpd) {
-          
-            $skpd->data()->delete(); 
-            $skpd->delete();
-        }
-    
-        return redirect()->route('tables')->with('success', 'Data berhasil dihapus.');
     }
-    
-  
-    
-    
+
+
     /**
      * Store a newly created resource in storage.
      *
@@ -144,8 +172,8 @@ class PengelolaController extends Controller
      * @param  \App\Models\PengelolaModel  $pengelolaModel
      * @return \Illuminate\Http\Response
      */
-    public function destroy(skpdModel $pengelolaModel)
-    {
-        //
-    }
+    // public function destroy(PengelolaModel $pengelolaModel)
+    // {
+
+    // }
 }

@@ -9,7 +9,7 @@
 <body>
 <div class="container mt-5">
 
-<form action="{{ route('pencatatan.nott', ['id' => $data->id_skpd]) }}" method="post"  enctype="multipart/form-data">
+<form action="{{ route('pencatatan.nott', ['id_skpd' => $data->id_skpd]) }}" method="post" enctype="multipart/form-data">
     @csrf 
     <div class="row">
         <div class="col-12">
@@ -24,17 +24,17 @@
                     <input type="file" name="file" id="file" class="form-control-file" >
                     </div>
                     <label>Tahun</label>
-                    <input type="number" name="tahun_pengumpulan" class="form-control mb-2" required>
+                    <input type="number" name="tahun_pengumpulan" class="form-control mb-2">
                     <label>Judul Publikasi</label>
-                    <input type="text" name="judul_publikasi" class="form-control mb-2" required >
+                    <input type="text" name="judul_publikasi" class="form-control mb-2" >
                     <label>Link Publikasi</label>
-                    <input type="url" name="link_publikasi" class="form-control mb-2" required>
+                    <input type="url" name="link_publikasi" class="form-control mb-2">
                     <label>Link Metadata</label>
-                    <input type="url" name="link_metadata" class="form-control mb-2" required>
+                    <input type="url" name="link_metadata" class="form-control mb-2">
                     <label>Link Rekomendasi</label>
-                    <input type="url" name="link_rekomendasi" class="form-control mb-2" required>
+                    <input type="url" name="link_rekomendasi" class="form-control mb-2">
                     <label>Keterangan</label>
-                    <input type="text" name="keterangan_pengumpulan" class="form-control mb-2" required>
+                    <input type="text" name="keterangan_pengumpulan" class="form-control mb-2">
 
                 </div>
             </div>

@@ -17,6 +17,7 @@ class data extends Model
                            'tahun_pengumpulan',
                            'status_pengumpulan',
                            'keterangan_pengumpulan',
+                           'file'
                         ];
     public function skpd (){
         return $this->belongsTo(skpdModel::class, 'id_skpd', 'id_skpd');

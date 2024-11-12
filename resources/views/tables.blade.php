@@ -15,19 +15,6 @@
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">DataTables</h6>
         <div class="d-flex justify-content-end">
-    <div class="dropdown">
-        <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Urutkan
-        </button>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                <form action="{{ route('tables',) }}" method="GET">
-                    <select name="filter" id="filter" class="dropdown-item" onchange="this.form.submit()">
-                        <option value="terbaru" {{ request('filter') == 'terbaru' ? 'selected' : '' }}>Terbaru</option>
-                        <option value="tahun" {{ request('filter') == 'tahun' ? 'selected' : '' }}>Pertahun</option>
-                    </select>
-                </form>
-        </div>
-    </div>
 </div>
 
 
@@ -65,11 +52,11 @@
                         <a href="{{route('pencatatan.lihat',$skpd->id_skpd)}}" class="d-none d-sm-inline-block btn btn-sm btn-primary">Lihat</a> 
                         </td>
                         <td>
-                        <form action="{{ route('pencatatan.delete', $skpd->id_skpd) }}" method="post">
+                        <button class="btn btn-success mb-2">Edit</button>
+                        <form action="{{route('pencatatan.delete',$skpd->id_skpd)}}" method="post">
                          @csrf
-                         @method('DELETE')
-                         <button class="btn btn-sm btn-danger" id="delete" type="button">Hapus</button>
-                         </form>
+                         <button class="btn btn-sm btn-danger">Hapus</button>
+                        </form>
                         </td>
 
                 </tr>
