@@ -48,7 +48,7 @@ public function logout(){
 
     $request->session()->invalidate();
 
-    return redirect()->route('/login');
+    return redirect()->route('/logout');
 }
  
 

@@ -50,7 +50,7 @@ class PengelolaController extends Controller
         return view('pencatatan.input');
     }
     public function klik(Request $request){
-       /* $validateData =$request->validate([
+       $validateData =$request->validate([
             'tahun_pengumpulan' =>'required',
             'tanggal_pengumpulan' => 'required',
             'keterangan_pengumpulan' => 'required',
@@ -59,7 +59,7 @@ class PengelolaController extends Controller
             'link_metadata' => 'required',
             'link_rekomendasi' => 'required',
 
-        ]);*/
+        ]);
         $skpd = new data();
         $skpd->tahun_pengumpulan = $request->tahun_pengumpulan;
         $skpd->tanggal_pengumpulan = $request->tanggal_pengumpulan;

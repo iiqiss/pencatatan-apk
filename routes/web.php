@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PengelolaController;
+use App\Http\Controllers\Pengelola2Controller;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,21 +22,22 @@ Route::get('/', function () {
 
 /*Route::resource ('skpd', [SkpdController::class]);*/
 
- 
-Route::get('',function () {
+Route::get('/pencatatan',function () {
     return view('dashboard');
 })->name('dashboard');
+
 
 Route::get('/tables', function () {
     return view('tables');
 })->name('tables');
+
 
 Route::get('/login',[AuthController::class,'ShowLoginForm'])->name('login');
 Route::get('/sesi',[AuthController::class,'login'])->name('login.submit');
 Route::post('/logout', [AuthController::class, 'ShowLoginForm'])->name('logout');
 
 
-Route::get('/tables', [PengelolaController::class, 'tables'])->name('tables');
+Route::get('/tables',[PengelolaController::class, 'tables'])->name('tables');
 Route::get('/tables/input',[PengelolaController::class,'input'])->name('pencatatan.input');
 Route::post('/tables/klik', [PengelolaController::class, 'klik'])->name('pencatatan.klik');
 Route::get('/tables/submit', [PengelolaController::class, 'submit'])->name('pencatatan.submit');
@@ -44,7 +46,7 @@ Route::post('/tables/submit', [PengelolaController::class, 'submit'])->name('pen
 Route::post('/tables/tambah_tables', [PengelolaController::class, 'tambah'])->name('pencatatan.tambah');
 Route::get('/tables/input',[PengelolaController::class,'input'])->name('pencatatan.input');
 Route::get('/tables/pengelola',[PengelolaController::class])->name('pencatatan.pengelola');
-Route::post('/tables/hubungi',[Pengelola2Controller::class])->name('pencatatan.hubungi');
-Route::get('/tables/hubungi',[Pengelola2Controller::class])->name('pencatatan.hubungi');
+Route::get('/tables/hubungi', [Pengelola2Controller::class, 'hubungi'])->name('pencatatan.hubungi');
+Route::post('/tables/hubungi',[Pengelola2Controller::class, 'hubungi'])->name('pencatatan.hubungi');
 Route::delete('/tables/delete/{id_skpd}',[PengelolaController::class,'delete'])->name('pencatatan.delete');
 

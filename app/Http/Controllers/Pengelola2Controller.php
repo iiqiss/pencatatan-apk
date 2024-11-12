@@ -7,7 +7,7 @@ use App\Models\skpdModel;
 use App\Models\PengelolaModel;
 use Illuminate\Http\Request;
 
-class Pengelola2Contoller extends Controller
+class Pengelola2Controller extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,11 +18,15 @@ class Pengelola2Contoller extends Controller
     {
         //
     }
+
+
     public function pengelola()
     {
         $pengelola = PengelolaModel::all();
         return view('pencatatan.pengelola',['pengelola' => $pengelola]);
     }
+
+
     public function enter(Request $request)
 {
     $validateData =$request->validate([
@@ -40,10 +44,14 @@ class Pengelola2Contoller extends Controller
 
     return redirect()->route('pencatatan.hubungi');
 }
-    public function hubungi()
-     {
-        return view('pencatatan.hubungi',compact ('pengelola'));
-     }
+
+
+public function hubungi()
+{
+    $pengelola = PengelolaModel::all(); 
+    return view('pencatatan.hubungi', compact('pengelola'));
+}
+
 
     /**
      * Show the form for creating a new resource.
@@ -72,6 +80,8 @@ class Pengelola2Contoller extends Controller
      * @param  \App\Models\PengelolaModel  $pengelolaModel
      * @return \Illuminate\Http\Response
      */
+
+
     public function show(PengelolaModel $pengelolaModel)
     {
         //
@@ -83,6 +93,7 @@ class Pengelola2Contoller extends Controller
      * @param  \App\Models\PengelolaModel  $pengelolaModel
      * @return \Illuminate\Http\Response
      */
+
     public function edit(PengelolaModel $pengelolaModel)
     {
         //
@@ -95,6 +106,7 @@ class Pengelola2Contoller extends Controller
      * @param  \App\Models\PengelolaModel  $pengelolaModel
      * @return \Illuminate\Http\Response
      */
+
     public function update(Request $request, PengelolaModel $pengelolaModel)
     {
         //
@@ -106,6 +118,7 @@ class Pengelola2Contoller extends Controller
      * @param  \App\Models\PengelolaModel  $pengelolaModel
      * @return \Illuminate\Http\Response
      */
+
     public function destroy(PengelolaModel $pengelolaModel)
     {
         //

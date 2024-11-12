@@ -44,7 +44,7 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Selamat datang!</h1>
                                     </div>
-                                    <form class="user" action="{{route('login.submit')}}" methode="POST">
+                                    <form class="user" action="{{route('dashboard')}}" methode="post">
                                         @csrf
                                         
                                         <div class="form-group">
@@ -73,7 +73,7 @@
                                         <a class="small" href="forgot-password.html">Forgot Password?</a>
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" href="register.html">Create an Account!</a>
+                                        <a class="small" href="{{ route('login') }}">Create an Account!</a>
                                     </div>
                                 </div>
                             </div>
