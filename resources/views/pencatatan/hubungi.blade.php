@@ -21,17 +21,23 @@
                     @foreach($pengelola as $no => $item)
                         <tr>
                             <td>{{ $no + 1 }}</td>
-                            <td>{{ $item->nip }}</td>
-                            <td>{{ $item->nama_pengelola }}</td>
-                            <td>{{ $item->kontak_pengelola }}</td>
                             <td>{{ $item->nama_dinas }}</td>
                         </tr>
                     @endforeach
                 </thead>
+                <tbody>
+                    @foreach($pengelola as $index => $p)
+                        <tr>
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ $p->nip }}</td>
+                            <td>{{ $p->nama_pengelola }}</td>
+                            <td>{{ $p->nama_dinas }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
             </table>
        </div>
     </div>
-
 
 </div>
 

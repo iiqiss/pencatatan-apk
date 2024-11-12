@@ -1,5 +1,27 @@
 @extends('layouts/app')
 @section('content')
+<div class="row">
+<h1>Welcome to website</h1>
+
+<!-- Earnings (Monthly) Card Example -->
+</div>
+
+<!-- Content Row -->
+
+<div class="row">
+
+<!-- Area Chart -->
+
+</div>
+
+<!-- Content Row -->
+<div class="row">
+
+<!-- Content Column -->
+
+</div>
+@endsection@extends('layouts/app')
+@section('content')
 <div class="container-fluid">
 <h1 class="h3 mb-2 text-gray-800">Dashboard</h1>
 <p class="mb-4">

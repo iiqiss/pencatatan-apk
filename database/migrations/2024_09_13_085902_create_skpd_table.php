@@ -17,10 +17,7 @@ return new class extends Migration
             $table->id('id_skpd');
             $table->string('nama_skpd');
             $table->text('alamat_skpd');
-            $table->bigInteger('nip')->nullable();
-            $table->string('nama_pengelola')->nullable();
-            $table->bigInteger('kontak_pengelola')->nullable();
-            $table->timestamps();
+            $table->timestamps(); 
         });
     }
 

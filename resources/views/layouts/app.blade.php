@@ -9,9 +9,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Pencatatan</title>
+    <title>pencatatan</title>
 
     <!-- Custom fonts for this template-->
+    
     <link href="{{asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -21,8 +22,6 @@
     <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-    
-
 </head>
 
 <body id="page-top">
@@ -31,7 +30,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-         @include('layouts/sidebar')
+        @include('layouts/sidebar')
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -41,18 +40,18 @@
             <div id="content">
 
                 <!-- Topbar -->
-
-                 @include('layouts/navbar')
+                @include('layouts/navbar')
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-
-                    @yield('content')
+                 
+                     @yield('content')
                     <!-- Content Row -->
- 
+                 
+
                 </div>
                 <!-- /.container-fluid -->
 
@@ -60,7 +59,7 @@
             <!-- End of Main Content -->
 
             <!-- Footer -->
-             @include('layouts/footer')
+            @include('layouts/footer')
             <!-- End of Footer -->
 
         </div>
@@ -80,21 +79,23 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to exit?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body">pilih "Logout" jika anda ingin mengakhiri sesi ini.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a class="btn btn-primary" href="{{route('logout')}}">Logout</a>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Bootstrap core JavaScript-->
+    
     <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
     <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
@@ -118,34 +119,6 @@
     <!-- Page level custom scripts -->
     <script src="{{asset('js/demo/datatables-demo.js')}}"></script>
     
-    <!-- SweetAlert2 JS -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script type="text/javascript">
-    $(function(){
-        $(document).on('click','#delete',function(e){
-            e.preventDefault();
-            var form = $(this).closest('form'); 
-            Swal.fire({
-                title: "Apakah Anda Yakin Ingin Menghapusnya?",
-                text: "Anda tidak dapat mengembalikannya!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Ya, Hapus!"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    form.submit();
-                }
-            });
-        });
-    });
-</script>
-
-
-
-
 </body>
 
 </html>
