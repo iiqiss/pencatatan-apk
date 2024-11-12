@@ -43,10 +43,10 @@ public function login (request $request){
         return redirect()->route('login');
     }
 }
-public function logout(){
-    Auth::guard('web')->logout();   
+// public function logout(){
+//     Auth::guard('web')->logout();   
 
-    $request->session()->invalidate();
+//     $request->session()->invalidate();
 
     return redirect()->route('/logout');
 }

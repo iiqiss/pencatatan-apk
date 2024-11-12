@@ -10,11 +10,8 @@ class skpdModel extends Model
     use HasFactory;
     protected $table = 'skpd';
     protected $primaryKey = 'id_skpd';
-    protected $fillable = ['nama_skpd','alamat_skpd'];
+    protected $fillable = ['nip','nama_pengelola','kontak_pengelola','nama_skpd','alamat_skpd'];
     public function data (){
-        return $this->hasMany(data::class);
-    }
-    public function pengelola (){
-        return $this->belongsTo(PengelolaModel::class);
+        return $this->hasMany(data::class, 'id_skpd', 'id_skpd');
     }
 }

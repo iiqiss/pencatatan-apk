@@ -10,20 +10,16 @@ class data extends Model
     use HasFactory;
     protected $table = 'data';
     protected $primaryKey = 'id_data';
-    protected $fillable = ['tahun_pengumpulan',
-                           'tanggal_pengumpulan',
+    protected $fillable = ['judul_publikasi',
+                           'link_publikasi',
+                           'link_metadata',
+                           'link_rekomendasi',
+                           'tahun_pengumpulan',
                            'status_pengumpulan',
                            'keterangan_pengumpulan',
-                           'judul_publikasi',
-                           'link_publikasi',
-                           'metadata',
-                           'link_metadata',
-                           'rekomendasi',
-                           'link_rekomendasi',];
-    public function data (){
-        return $this->belongsTo(data::class);
-    }
+                           'file'
+                        ];
     public function skpd (){
-        return $this->belongsTo(PengelolaModel::class);
+        return $this->belongsTo(skpdModel::class, 'id_skpd', 'id_skpd');
     }
 }

@@ -9,4 +9,22 @@
   .sidebar .nav-item .nav-link:hover {
     color: #cce7ff !important;
   }
-  
+  .link-sms {
+    color: #6c757d; /* warna abu-abu untuk link SMS */
+    text-decoration: underline;
+}
+
+.link-whatsapp {
+    color: #25D366; /* warna hijau untuk link WhatsApp */
+    text-decoration: underline;
+}
+
+.link-sms:hover {
+    color: #495057; /* warna abu-abu lebih gelap saat di-hover */
+    text-decoration: none;
+}
+
+.link-whatsapp:hover {
+    color: #1c9c52; /* warna hijau lebih gelap untuk WhatsApp saat di-hover */
+    text-decoration: none;
+}

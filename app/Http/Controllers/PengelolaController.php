@@ -6,11 +6,8 @@ use Illuminate\Support\Facades\Pengelola;
 use App\Http\Controllers\Controller;
 
 use App\Models\data;
-use App\Models\PengelolaModel;
 use App\Models\skpdModel;
-
 use Illuminate\Http\Request;
-
 class PengelolaController extends Controller
 {
 
@@ -24,33 +21,60 @@ class PengelolaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function tables()
+    public function tables(Request $request)
     {
-        //
-        $skpd = skpdModel::all();
+        $query = skpdModel::query();
+    
+        if ($request->has('filter')) {
+            $filter = $request->input('filter');
+    
+            if ($filter == 'terbaru') {
+                $query->orderBy('created_at', 'DESC');
+            } elseif ($filter == 'tahun') {
+                $currentYear = date('Y');
+                $query->whereYear('created_at', $currentYear);
+            }
+        } else {
+
+            $query->orderBy('created_at', 'DESC');
+        }
+    
+      
+        $skpd = $query->get();
+    
         return view('tables', compact('skpd'));
-        
     }
+    
+
     public function submit(Request $request){
         $validateData =$request->validate([
+            'nip' =>'required',
+            'nama_pengelola' => 'required',
+            'kontak_pengelola' => 'required',
             'nama_skpd' => 'required',
             'alamat_skpd' => 'required',
+
+
         ]);
-        
+
         $skpd = new skpdModel();
+        $skpd->nip = $request->nip;
+        $skpd->nama_pengelola = $request->nama_pengelola;
+        $skpd->kontak_pengelola = $request->kontak_pengelola;
         $skpd->nama_skpd = $request->nama_skpd;
         $skpd->alamat_skpd = $request->alamat_skpd;
-    
+
         $skpd->save();
         return redirect()->route('tables');
     }
      public function input()
     {
+        //
 
         return view('pencatatan.input');
     }
     public function klik(Request $request){
-       $validateData =$request->validate([
+        $validateData =$request->validate([
             'tahun_pengumpulan' =>'required',
             'tanggal_pengumpulan' => 'required',
             'keterangan_pengumpulan' => 'required',
@@ -78,24 +102,21 @@ class PengelolaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function pengelola()
-    {
-        //
-        $pengelola = PengelolaModel::all();
-        return view('pencatatan.pengelola',compact($pengelola));
-    }
+
     public function tambah()
     {
         //
         return view('pencatatan.tambah');
     }
-   
-    
+
+
     public function delete($id)
     {
-        $skpd = skpdModel::findOrFail($id);
+        //
+        $skpd = skpdModel::find($id);
         $skpd->delete();
-        return redirect('tables');   
+        return redirect()->route('tables');
+        
     }
 
 
@@ -109,7 +130,7 @@ class PengelolaController extends Controller
     {
         //
     }
-    
+
 
     /**
      * Display the specified resource.
@@ -117,7 +138,7 @@ class PengelolaController extends Controller
      * @param  \App\Models\PengelolaModel  $pengelolaModel
      * @return \Illuminate\Http\Response
      */
-    public function show(PengelolaModel $pengelolaModel)
+    public function show(skpdModel $pengelolaModel)
     {
         //
     }
@@ -128,7 +149,7 @@ class PengelolaController extends Controller
      * @param  \App\Models\PengelolaModel  $pengelolaModel
      * @return \Illuminate\Http\Response
      */
-    public function edit(PengelolaModel $pengelolaModel)
+    public function edit(skpdModel $pengelolaModel)
     {
         //
     }
@@ -140,7 +161,7 @@ class PengelolaController extends Controller
      * @param  \App\Models\PengelolaModel  $pengelolaModel
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PengelolaModel $pengelolaModel)
+    public function updat(Request $request, skpdModel $pengelolaModel)
     {
         //
     }
@@ -151,8 +172,8 @@ class PengelolaController extends Controller
      * @param  \App\Models\PengelolaModel  $pengelolaModel
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    // public function destroy(PengelolaModel $pengelolaModel)
+    // {
 
-    }
+    // }
 }

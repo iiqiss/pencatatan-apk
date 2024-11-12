@@ -13,12 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('pengelola', function (Blueprint $table) {
-            $table->id('nip');
-            $table->string('nama_pengelola');
-            $table->bigInteger('kontak_pengelola');
-            $table->string('nama_dinas');
-            $table->timestamps();
+        Schema::table('data', function (Blueprint $table) {
+            //
+            $table->string('file')->nullable();
         });
     }
 
@@ -29,6 +26,10 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pengelola');
+        Schema::table('data', function (Blueprint $table) {
+            //
+            $table->dropColumn('file');
+
+        });
     }
 };
