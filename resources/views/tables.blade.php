@@ -53,7 +53,7 @@
                         </td>
                         <td>
                         <button class="btn btn-success mb-2">Edit</button>
-                        <form action="{{route('pencatatan.delete',$skpd->id_skpd)}}" method="post">
+                        <form action="" method="post">
                          @csrf
                          <button class="btn btn-sm btn-danger">Hapus</button>
                         </form>

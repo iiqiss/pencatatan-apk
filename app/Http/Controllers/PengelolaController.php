@@ -67,35 +67,7 @@ class PengelolaController extends Controller
         $skpd->save();
         return redirect()->route('tables');
     }
-     public function input()
-    {
-        //
-
-        return view('pencatatan.input');
-    }
-    public function klik(Request $request){
-        $validateData =$request->validate([
-            'tahun_pengumpulan' =>'required',
-            'tanggal_pengumpulan' => 'required',
-            'keterangan_pengumpulan' => 'required',
-            'judul_publikasi' => 'required',
-            'link_publikasi' => 'required',
-            'link_metadata' => 'required',
-            'link_rekomendasi' => 'required',
-
-        ]);
-        $skpd = new data();
-        $skpd->tahun_pengumpulan = $request->tahun_pengumpulan;
-        $skpd->tanggal_pengumpulan = $request->tanggal_pengumpulan;
-        $skpd->keterangan_pengumpulan = $request->keterangan_pengumpulan;
-        $skpd->judul_publikasi = $request->judul_publikasi;
-        $skpd->link_publikasi = $request->link_publikasi;
-        $skpd->link_metadata = $request->link_metadata;
-        $skpd->link_rekomendasi = $request->link_rekomendasi;
     
-        $skpd->save();
-        return redirect()->route('tables');
-    }
 
     /**
      * Show the form for creating a new resource.

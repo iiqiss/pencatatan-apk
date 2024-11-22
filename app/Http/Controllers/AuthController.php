@@ -48,7 +48,7 @@ public function login (request $request){
 
 // //     $request->session()->invalidate();
 
-//     return redirect()->route('/logout');
+//     return redirect()->route('/login');
 // }
  
 

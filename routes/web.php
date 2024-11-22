@@ -1,50 +1,41 @@
 <?php
-
-use App\Http\Controllers\Pengelola2Contoller;
-use App\Http\Controllers\PengelolaController;
 use App\Http\Controllers\Pengelola2Controller;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PengelolaController;
+
 use Illuminate\Support\Facades\Route;
 
+/*
 /* 
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
+@@ -17,37 +16,26 @@
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 /*Route::resource ('skpd', [SkpdController::class]);*/
-
-Route::get('/pencatatan',function () {
+ 
+Route::get('/',function () {
     return view('dashboard');
 })->name('dashboard');
-
 
 Route::get('/tables', function () {
     return view('tables');
 })->name('tables');
-
+Route::get('/status', function () {
+    return view('status');
+})->name('status');
+Route::get('/tables', [PengelolaController::class, 'tables'])->name('tables');
+Route::post('/tables/submit', [PengelolaController::class, 'submit'])->name('pencatatan.submit');
+Route::get('/tables/tambah tables',[PengelolaController::class,'tambah'])->name('pencatatan.tambah');
+Route::post('/tables/enter', [Pengelola2Controller::class, 'enter'])->name('pencatatan.enter');
+Route::get('/tables/lihat/{id_skpd}', [Pengelola2Controller::class, 'lihat'])->name('pencatatan.lihat');
+Route::get('/tables/input2/{id_skpd}', [Pengelola2Controller::class, 'input2'])->name('pencatatan.input2');
+Route::post('/tables/nott/{id_skpd}', [Pengelola2Controller::class, 'nott'])->name('pencatatan.nott');
 Route::get('/login',[AuthController::class,'ShowLoginForm'])->name('login');
 Route::get('/sesi',[AuthController::class,'login'])->name('login.submit');
 Route::post('/logout', [AuthController::class, 'ShowLoginForm'])->name('logout');
-
-
-Route::get('/tables', [PengelolaController::class, 'tables'])->name('tables');
-Route::get('/tables/input',[PengelolaController::class,'input'])->name('pencatatan.input');
-Route::post('/tables/klik', [PengelolaController::class, 'klik'])->name('pencatatan.klik');
-Route::post('/tables/submit', [PengelolaController::class, 'submit'])->name('pencatatan.submit');
-Route::post('/tables/tambah_tables', [PengelolaController::class, 'tambah'])->name('pencatatan.tambah');
-Route::get('/tables/input',[PengelolaController::class,'input'])->name('pencatatan.input');
-Route::get('/tables/pengelola',[PengelolaController::class])->name('pencatatan.pengelola');
-Route::post('/tables/hubungi',[Pengelola2Controller::class])->name('pencatatan.hubungi');
-Route::get('/tables/hubungi',[Pengelola2Controller::class])->name('pencatatan.hubungi');
-Route::delete('/tables/delete/{id_skpd}',[PengelolaController::class,'delete'])->name('pencatatan.delete');
 

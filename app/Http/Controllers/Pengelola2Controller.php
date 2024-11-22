@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Pengelola2;
 use App\Models\data;
 use App\Models\skpdModel;
 use App\Models\PengelolaModel;
@@ -18,33 +18,6 @@ class Pengelola2Controller extends Controller
     {
         //
     }
-    public function pengelola()
-    {
-        $pengelola = PengelolaModel::all();
-        return view('pencatatan.pengelola',['pengelola' => $pengelola]);
-    }
-    public function enter(Request $request)
-{
-    $validateData =$request->validate([
-        'nip' =>'required|unique:pengelola,nip',
-        'nama_pengelola' => 'required',
-        'kontak_pengelola' => 'required',
-        'nama_dinas' => 'required',
-    ]);
-    $pengelola = new PengelolaModel();
-    $pengelola->nip = $request->nip;
-    $pengelola->nama_pengelola = $request->nama_pengelola;
-    $pengelola->kontak_pengelola = $request->kontak_pengelola;
-    $pengelola->nama_dinas = $request->nama_dinas;
-    $pengelola->save();
-
-    return redirect()->route('pencatatan.hubungi');
-}
-    public function hubungi()
-     {
-        return view('pencatatan.hubungi',compact ('pengelola'));
-     }
-
     /**
      * Show the form for creating a new resource.
      *
