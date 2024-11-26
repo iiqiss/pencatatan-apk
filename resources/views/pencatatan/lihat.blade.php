@@ -82,10 +82,11 @@
 
                             <td>{{$d->keterangan_pengumpulan}}</td>
                             <td>
-                            <button class="btn btn-success mb-2">Edit</button>
-                        <form action="" method="post">
-                         @csrf
-                         <button class="btn btn-sm btn-danger mb-2">Hapus</button>
+                            <button class="btn btn-success mb-2" href="">Edit</button>
+                            <form method="post" action="" style="display: inline-block">
+                            @csrf
+                         @method('DELETE')
+                         <button class="btn btn-sm btn-danger mb-2" onclick="return confirm('Apakah anda yakin akan menghapus data ini?')">Hapus</button>
                         </form>
                         </td>
                         </tr>
